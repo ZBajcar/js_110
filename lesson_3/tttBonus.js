@@ -6,6 +6,8 @@ const HUMAN_MARKER = 'X';
 const COMPUTER_MARKER = 'O';
 const WINS_NEEDED = 5;
 const MIDDLE_SQUARE = '5';
+const PLAYER = 'Player';
+const COMPUTER = 'Computer';
 let currentPlayer;
 
 const WINNING_LINES = [
@@ -92,9 +94,8 @@ function findAtRiskSquare(line, board, marker) {
   return null;
 }
 
-function computerChoosesSquare(board) {
+function compAttAndDef(board) {
   let square;
-
   for (let index = 0; index < WINNING_LINES.length; index += 1) {
     let line = WINNING_LINES[index];
     square = findAtRiskSquare(line, board, COMPUTER_MARKER);
@@ -108,6 +109,11 @@ function computerChoosesSquare(board) {
       if (square) break;
     }
   }
+  return square;
+}
+
+function computerChoosesSquare(board) {
+  let square = compAttAndDef(board);
 
   if (!square && board[MIDDLE_SQUARE] === INITIAL_MARKER) {
     square = MIDDLE_SQUARE;
@@ -138,13 +144,13 @@ function detectWinner(board) {
         board[sq2] === HUMAN_MARKER &&
         board[sq3] === HUMAN_MARKER
     ) {
-      return 'Player';
+      return PLAYER;
     } else if (
       board[sq1] === COMPUTER_MARKER &&
         board[sq2] === COMPUTER_MARKER &&
         board[sq3] === COMPUTER_MARKER
     ) {
-      return 'Computer';
+      return COMPUTER;
     }
   }
 
@@ -152,19 +158,19 @@ function detectWinner(board) {
 }
 
 function chooseSquare(board, currentPlayer) {
-  if (currentPlayer === 'Player') {
+  if (currentPlayer === PLAYER) {
     return playerChoosesSquare(board);
-  } else if (currentPlayer === 'Computer') {
+  } else if (currentPlayer === COMPUTER) {
     return computerChoosesSquare(board);
   }
   return null;
 }
 
 function alternatePlayer(currentPlayer) {
-  if (currentPlayer === 'Player') {
-    return 'Computer';
-  } else if (currentPlayer === 'Computer') {
-    return 'Player';
+  if (currentPlayer === PLAYER) {
+    return COMPUTER;
+  } else if (currentPlayer === COMPUTER) {
+    return PLAYER;
   }
   return null;
 }
@@ -174,7 +180,7 @@ while (true) {
   prompt(MESSAGE.first);
   let choice = readline.question().trim();
 
-  while (choice !== 'Player' && choice !== 'Computer') {
+  while (choice !== PLAYER && choice !== COMPUTER) {
     prompt(MESSAGE.invalidFirst);
     choice = readline.question().trim();
   }
@@ -191,7 +197,7 @@ while (true) {
 
     while (true) {
       displayBoard(board);
-      console.log(`Player score: ${obj['Player']}. Computer Score: ${obj['Computer']}`);
+      console.log(`Player score: ${obj[PLAYER]}. Computer Score: ${obj[COMPUTER]}`);
       chooseSquare(board, currentPlayer);
       currentPlayer = alternatePlayer(currentPlayer);
       if (someoneWon(board) || boardFull(board)) break;
@@ -202,7 +208,7 @@ while (true) {
     if (someoneWon(board)) {
       prompt(`${detectWinner(board)} won!`);
       obj[detectWinner(board)] += 1;
-      prompt(`Player score: ${obj['Player']}. Computer Score: ${obj['Computer']}`);
+      prompt(`Player score: ${obj[PLAYER]}. Computer Score: ${obj[COMPUTER]}`);
     } else {
       prompt(MESSAGE.tie);
     }
