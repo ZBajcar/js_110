@@ -1,0 +1,10 @@
+{
+  "notValid": "Sorry, that's not a valid choice.",
+  "first": "Choose who goes first: (Player or Computer)",
+  "invalidFirst": "Invalid answer. Choose (Player) to go first or (Computer) to go second",
+  "tie": "It's a tie!",
+  "nextRound": "Ready for next round? (y or n)",
+  "invalidNext": "Invalid answer. Ready for next round? (y or n)",
+  "again": "Play again? (y or n)",
+  "thanks": "Thanks for playing Tic Tac Toe!"
+}
