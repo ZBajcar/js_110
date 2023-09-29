@@ -6,5 +6,9 @@
   "nextRound": "Ready for next round? (y or n)",
   "invalidNext": "Invalid answer. Ready for next round? (y or n)",
   "again": "Play again? (y or n)",
-  "thanks": "Thanks for playing Tic Tac Toe!"
+  "thanks": "Thanks for playing Tic Tac Toe!",
+  "intro": "Welcome to tic tac toe!\nThe rules are very simple!",
+  "ruleOne": "1.)You can choose to go first or second",
+  "ruleTwo": "2.)The objective is to get three of your markers in a row",
+  "ruleThree": "3.)The first too 5 wins, wins it all!\nNow if you're rdy to begin"
 }

@@ -175,6 +175,11 @@ function alternatePlayer(currentPlayer) {
   return null;
 }
 
+prompt(MESSAGE.intro);
+prompt(MESSAGE.ruleOne);
+prompt(MESSAGE.ruleTwo);
+prompt(MESSAGE.ruleThree);
+
 while (true) {
 
   prompt(MESSAGE.first);
@@ -185,7 +190,7 @@ while (true) {
     choice = readline.question().trim();
   }
 
-  let obj = {
+  let scoreCount = {
     Player: 0,
     Computer: 0
   };
@@ -197,7 +202,7 @@ while (true) {
 
     while (true) {
       displayBoard(board);
-      console.log(`Player score: ${obj[PLAYER]}. Computer Score: ${obj[COMPUTER]}`);
+      console.log(`Player score: ${scoreCount[PLAYER]}. Computer Score: ${scoreCount[COMPUTER]}`);
       chooseSquare(board, currentPlayer);
       currentPlayer = alternatePlayer(currentPlayer);
       if (someoneWon(board) || boardFull(board)) break;
@@ -207,13 +212,13 @@ while (true) {
 
     if (someoneWon(board)) {
       prompt(`${detectWinner(board)} won!`);
-      obj[detectWinner(board)] += 1;
-      prompt(`Player score: ${obj[PLAYER]}. Computer Score: ${obj[COMPUTER]}`);
+      scoreCount[detectWinner(board)] += 1;
+      prompt(`Player score: ${scoreCount[PLAYER]}. Computer Score: ${scoreCount[COMPUTER]}`);
     } else {
       prompt(MESSAGE.tie);
     }
 
-    if (obj[detectWinner(board)] === WINS_NEEDED) {
+    if (scoreCount[detectWinner(board)] === WINS_NEEDED) {
       prompt(`${detectWinner(board)} is the grand winner!`);
       break;
     }
